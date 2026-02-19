@@ -1,0 +1,10 @@
+#ifdef CONFIG_KSU_MANUAL_SU
+        // Handle task_alloc via clone/fork
+        if (id == __NR_clone
+#ifdef __NR_clone3
+            || id == __NR_clone3
+#endif
+        ) {
+            return ksu_handle_task_alloc(regs);
+        }
+#endif
